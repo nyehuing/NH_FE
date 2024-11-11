@@ -1,4 +1,4 @@
-## allergic 앱의 프론트 레포지토리
+## CarKing 앱의 프론트 레포지토리
 
 ### Commit Rules
 | type | description |
