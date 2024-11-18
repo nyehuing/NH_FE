@@ -1,16 +1,13 @@
+
 import { 
     StyleSheet, 
     Text, 
     View, 
-    Modal, 
-    TextInput, 
-    TouchableOpacity,
-    TouchableWithoutFeedback
 } from 'react-native';
 
 
 
-export default function Map(){
+export default function Map({data}){
     const number = [
         {id:1, status:false, jang:false, king:false, Eg:false, small:false},
         {id:2, status:false, jang:false, king:false, Eg:false, small:false},
@@ -60,52 +57,53 @@ export default function Map(){
         {id:46, status:false, jang:false, king:false, Eg:false, small:false},
         {id:47, status:false, jang:false, king:false, Eg:false, small:false},
         {id:48, status:false, jang:false, king:false, Eg:false, small:false},
-
     ]
-
     return(
         <View style={styles.container}>
+            <View style={styles.schoolMain}>
+                <Text style={styles.SText}>학교 본관</Text>
+            </View>
             <View style={styles.oneBlock}>
-                {number.slice(0, 11).map((item)=>{
+                {data.slice(1, 12).map((item, index)=>{
                     return (
-                        <View style={styles.garo}>
-                            <Text style={styles.text}>{item.id}</Text>
+                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
+                            <Text style={styles.text}>{index+1}</Text>
                         </View>
                     )
                 })}
             </View>
             <View style={styles.twoBlock}>
-                {number.slice(11, 21).map((item)=>{
+                {data.slice(12, 22).map((item, index)=>{
                     return(
-                        <View style={styles.garo}>
-                            <Text style={styles.text}>{item.id}</Text>
+                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
+                            <Text style={styles.text}>{index+12}</Text>
                         </View>
                     )
                 })}
             </View>
             <View style={styles.threeBlock}>
-            {number.slice(21, 31).map((item)=>{
+            {data.slice(22, 32).map((item, index)=>{
                     return(
-                        <View style={styles.garo}>
-                            <Text style={styles.text}>{item.id}</Text>
+                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
+                            <Text style={styles.text}>{index+22}</Text>
                         </View>
                     )
                 })}
             </View>
             <View style={styles.forBlock}>
-            {number.slice(31, 40).map((item)=>{
+            {data.slice(32, 41).map((item, index)=>{
                     return(
-                        <View style={styles.garo}>
-                            <Text style={styles.text}>{item.id}</Text>
+                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
+                            <Text style={styles.text}>{index+32}</Text>
                         </View>
                     )
                 })}
             </View>
             <View style={styles.fiveBlock}>
-                {number.slice(40, 48).map((item)=>{
+                {data.slice(41, 49).map((item, index)=>{
                     return(
-                        <View style={styles.sero}>
-                            <Text>{item.id}</Text>
+                        <View key={index} style={[styles.sero, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
+                            <Text  style={styles.text}>{index+41}</Text>
                         </View>
                     )
                 })}
@@ -117,12 +115,30 @@ export default function Map(){
 const styles = StyleSheet.create({
     container:{
         position:'absolute',
-        top:100,
-        flex:1
+        top:90,
+        left:20,
+        flex:1,
     },
     text:{
         fontSize:16,
         textAlign:'center'
+    },
+    schoolMain:{
+        position:'absolute',
+        top:-30,
+        backgroundColor:'#858585',
+        width:340,
+        height:40,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    SText:{
+        color:'white',
+        fontSize:16,
+        fontWeight:'600',
+        width:61,
     },
     garo:{
         backgroundColor:'#53F657',
