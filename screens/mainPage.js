@@ -14,6 +14,7 @@ import Footer from '../components/footer';
 import FindBtn from '../components/findBtn';
 import axios from "axios";
 import Map from '../components/map'
+import Logo from '../assets/logo.svg';
 
 export default function MainPage(){
     const navigate = useNavigation();
@@ -21,7 +22,8 @@ export default function MainPage(){
     const [carNum, setCarNum] = useState('');
     const [carNumConst, setCarNumConst] = useState();
     const [selectNum, setSelectNum] = useState(null);
-    const [data , setData] = useState({ parking: [] });
+    const [data , setData] = useState({parking : []});
+    const [isLoading, setIsLoading] = useState(true);
 
     const modalToggle = ()=>{
         if(carNum !== ''){
@@ -43,19 +45,28 @@ export default function MainPage(){
       try{ 
         const response = await axios.get('http://10.150.150.105:3000/api/show');
         if(response.status === 200){
-          console.log("차량데이터가 왔습니다.", response.data);
           setData(response.data);  
+          
         }
         else{
           console.log(response.status);
         } 
       }catch(error){
         console.log("차량 정보가져오는데 에러떳다", error);
+      }finally{
+        setIsLoading(false);
       }
     }
     useEffect(()=>{
       getData();
-    }, [])
+    }, []) 
+    if(isLoading){
+      return(
+        <View style={styles.containerLoading}>
+          <Logo />
+        </View>
+      )
+    }
     return(
         <View style={{flex:1}}>
             {isModalVisible ? (<Modal
@@ -109,6 +120,15 @@ const styles = StyleSheet.create({
         backgroundColor:'#757575',
         flex: 1,
         position:'relative'
+    },
+    containerLoading:{
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor:'#F6C227',
+      flex: 1,
+      position:'relative'
     },
     darkOverlay: {
         width:'100%',
