@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { 
     StyleSheet, 
     Text, 
@@ -7,14 +7,15 @@ import {
     Modal, 
     TextInput, 
     TouchableOpacity,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Image
 } from 'react-native';
 
 import Footer from '../components/footer';
 import FindBtn from '../components/findBtn';
 import axios from "axios";
 import Map from '../components/map'
-import Logo from '../assets/logo.svg';
+import {IPContext} from '../context.js';
 
 export default function MainPage(){
     const navigate = useNavigation();
@@ -23,7 +24,8 @@ export default function MainPage(){
     const [carNumConst, setCarNumConst] = useState();
     const [selectNum, setSelectNum] = useState(null);
     const [data , setData] = useState({parking : []});
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const {ip} = useContext(IPContext);
 
     const modalToggle = ()=>{
         if(carNum !== ''){
@@ -34,7 +36,7 @@ export default function MainPage(){
     }
     const search = async ()=>{
         try{
-            const response = await axios.get(`http://10.150.150.105:3000/api/witch?carNumber=${carNum}`);
+            const response = await axios.get(`http://${ip}/api/witch?carNumber=${carNum}`);
             setSelectNum(response.data.parkingWitch);
             setCarNumConst(carNum);
         }catch(error){
@@ -43,14 +45,10 @@ export default function MainPage(){
     }
     const getData = async ()=>{
       try{ 
-        const response = await axios.get('http://10.150.150.105:3000/api/show');
-        if(response.status === 200){
-          setData(response.data);  
-          
-        }
-        else{
-          console.log(response.status);
-        } 
+        const response = await axios.get(`http://${ip}/api/show`);
+        if(response.status === 200) setData(response.data); 
+        else console.log(response.status);
+
       }catch(error){
         console.log("차량 정보가져오는데 에러떳다", error);
       }finally{
@@ -61,9 +59,13 @@ export default function MainPage(){
       getData();
     }, []) 
     if(isLoading){
-      return(
+      return( 
         <View style={styles.containerLoading}>
-          <Logo />
+          <View style={styles.megaBox}>
+          <Image source = {require('../assets/logo.png')}  />
+          <Text style={styles.loadingText}>자동차 주차 공간 확인할땐?</Text>
+          </View>
+         
         </View>
       )
     }
@@ -108,13 +110,20 @@ export default function MainPage(){
                   <Map data = {data.parking}/>
                 </View>
                 <FindBtn onClick={modalToggle}  name={'차량 번호 검색하기'}/>
-                <Footer />
+                <Footer front = {true} back = {false} />
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+  megaBox:{
+    flex:1,
+    display:'flex', 
+    alignItems:'center',
+    justifyContent:'center'
+
+  },
     container:{
         display:'flex',
         backgroundColor:'#757575',
@@ -123,7 +132,7 @@ const styles = StyleSheet.create({
     },
     containerLoading:{
       display:'flex',
-      flexDirection:'row',
+      flexDirection:'column',
       justifyContent:'center',
       alignItems:'center',
       backgroundColor:'#F6C227',
@@ -189,5 +198,11 @@ const styles = StyleSheet.create({
       marginBottom:5,
       fontSize:16,
       fontWeight:'700'
+    },
+    loadingText:{
+      marginTop:20,
+      fontSize:24,
+      fontWeight:'600',
+      textAlign:'center'
     }
 })

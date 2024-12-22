@@ -3,28 +3,26 @@ import {
     StyleSheet, 
     Text, 
     View, 
-    Modal, 
-    TextInput, 
     TouchableOpacity,
-    Image
 } from 'react-native';
 import DoorG from '../assets/door_Gray.svg'
 import DoorO from '../assets/door_Orange.svg'
 
-export default function Footer(){
+export default function Footer(props){
     return(
             <View style={styles.container}>
                 <TouchableOpacity>
                     <View style={styles.button}>
-                        <DoorO />
-                    <Text style={styles.selectText}>정문</Text>
+                        {props.front ? <DoorO /> : <DoorG />}
+                    <Text style={props.front ? styles.selectText : styles.text}>정문</Text>
                     </View>
                 </TouchableOpacity>
+
                 <TouchableOpacity>
-                <View style={styles.button}>
-                <DoorG />
-                <Text style={styles.text}>후문</Text>
-                </View>
+                    <View style={styles.button}>
+                        {props.back ?  <DoorO /> :  <DoorG />}
+                        <Text style={props.back ? styles.selectText : styles.text}>후문</Text>
+                    </View>
                 </TouchableOpacity>
                 
             </View>

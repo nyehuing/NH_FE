@@ -1,13 +1,62 @@
-
 import { 
     StyleSheet, 
     Text, 
     View, 
+    PanResponder, 
+    Animated 
 } from 'react-native';
+import {useRef, useState} from 'react';
 
 
 
 export default function Map({data}){
+
+    const scale = useRef(new Animated.Value(1)).current;
+    const translateX = useRef(new Animated.Value(0)).current;
+    const translateY = useRef(new Animated.Value(0)).current;
+  
+    const [lastScale, setLastScale] = useState(1);
+    const [lastOffset, setLastOffset] = useState({ x: 0, y: 0 });
+  
+    const panResponder = useRef(
+      PanResponder.create({
+        onMoveShouldSetPanResponder: (evt, gestureState) => {
+          return gestureState.numberActiveTouches > 0; // 드래그 시작
+        },
+        onPanResponderGrant: (evt, gestureState) => {
+          // 현재 위치 저장
+          translateX.setOffset(lastOffset.x);
+          translateY.setOffset(lastOffset.y);
+        },
+        onPanResponderMove: (evt, gestureState) => {
+          // 드래그 위치 업데이트
+          translateX.setValue(gestureState.dx);
+          translateY.setValue(gestureState.dy);
+        },
+        onPanResponderRelease: (evt, gestureState) => {
+          // 드래그 종료 시 위치 저장
+          translateX.flattenOffset();
+          translateY.flattenOffset();
+          setLastOffset({ x: lastOffset.x + gestureState.dx, y: lastOffset.y + gestureState.dy });
+        },
+      })
+    ).current;
+
+    const handlePinch = (event) => {
+        if (event.nativeEvent.touches.length > 1) {
+          const distance = Math.sqrt(
+            Math.pow(event.nativeEvent.touches[0].pageX - event.nativeEvent.touches[1].pageX, 2) +
+            Math.pow(event.nativeEvent.touches[0].pageY - event.nativeEvent.touches[1].pageY, 2)
+          );
+    
+          // 확대/축소 비율 계산
+          const newScale = distance / 200; // 조정할 기본 거리
+          Animated.spring(scale, {
+            toValue: newScale,
+            useNativeDriver: true,
+          }).start();
+        }
+      };
     const number = [
         {id:1, status:false, jang:false, king:false, Eg:false, small:false},
         {id:2, status:false, jang:false, king:false, Eg:false, small:false},
@@ -60,9 +109,25 @@ export default function Map({data}){
     ]
     return(
         <View style={styles.container}>
-            <View style={styles.schoolMain}>
+            {/* <View style={styles.schoolMain}>
                 <Text style={styles.SText}>학교 본관</Text>
+            </View> */}
+            <Animated.View
+        style={{
+          transform: [
+            { scale },
+            { translateX },
+            { translateY },
+          ],
+        }}
+        {...panResponder.panHandlers}
+        onTouchMove={handlePinch}
+      >
+        <View  style={styles.garo}>
+                <Text style={styles.text}>1</Text>
             </View>
+      </Animated.View>
+            
             <View style={styles.oneBlock}>
                 {data.slice(1, 12).map((item, index)=>{
                     return (
@@ -115,6 +180,8 @@ export default function Map({data}){
 const styles = StyleSheet.create({
     container:{
         position:'absolute',
+        backgroundColor:'red',
+        padding:10,
         top:90,
         left:20,
         flex:1,
