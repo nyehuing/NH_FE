@@ -15,11 +15,6 @@ export default function App(){
                 component={MainPage}
                 options={{headerShown: false}}
               />
-               <Stack.Screen 
-                name='BackPage'
-                component={MainPage}
-                options={{headerShown: false}}
-              />
             </Stack.Navigator>
           </NavigationContainer>
     </IPProvider>

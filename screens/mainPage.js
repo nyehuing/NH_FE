@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+
 import React, { useState, useEffect, useContext } from 'react';
 import { 
     StyleSheet, 
@@ -16,9 +16,9 @@ import FindBtn from '../components/findBtn';
 import axios from "axios";
 import Map from '../components/map'
 import {IPContext} from '../context.js';
+import Map2 from '../components/map2.js'
 
 export default function MainPage(){
-    const navigate = useNavigation();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [carNum, setCarNum] = useState('');
     const [carNumConst, setCarNumConst] = useState();
@@ -26,6 +26,7 @@ export default function MainPage(){
     const [data , setData] = useState({parking : []});
     const [isLoading, setIsLoading] = useState(false);
     const {ip} = useContext(IPContext);
+    const [isfront, setIsfront] = useState(true);
 
     const modalToggle = ()=>{
         if(carNum !== ''){
@@ -107,10 +108,14 @@ export default function MainPage(){
       </Modal>) : (null)}
             <View style={styles.container}>
                 <View style={styles.main}>
-                  <Map data = {data.parking}/>
+                  {isfront ? 
+                  <Map data = {data.parking}/> 
+                   : <Map2 data={data.parking}/>
+                  }
+                  
                 </View>
                 <FindBtn onClick={modalToggle}  name={'차량 번호 검색하기'}/>
-                <Footer front = {true} back = {false} />
+                <Footer front = {isfront} back = {!isfront} on = {()=>setIsfront(true)} off = {()=>setIsfront(false)}/>
             </View>
         </View>
     )

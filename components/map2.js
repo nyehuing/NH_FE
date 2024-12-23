@@ -6,22 +6,25 @@ import {
 
 
 export default function Map({data}){
-
     return(
         <View style={styles.container}>
            
-           <View>
-            
+           <View style={styles.aouditorium}>
+            <Text style={[{ color:'white'}]}>강당</Text>
            </View>
             <View style={styles.oneBlock}>
-                {data.slice(48, 59).map((item, index)=>{
+                {data.slice(1, 11).map((item, index)=>{
                     return (
                         <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
-                            <Text style={styles.text}>{index-48}</Text>
+                            <Text style={styles.text}>{index+1}</Text>
                         </View>
                     )
                 })}
             </View>
+            <View style={styles.src}>
+                <Text style={[{ color:'white'}, {marginLeft:2}]}>SRC관</Text>
+            </View>
+            
         </View>
     )
 }
@@ -66,53 +69,34 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         display:'flex',
     },
-    sero:{
-        backgroundColor:'#53F657',
-        height:70,
-        paddingHorizontal:10,
-        borderWidth: 1,
-        borderColor: 'black',  
-        borderStyle: 'solid',
-        display:'flex',
-        justifyContent:'center'
-    },
     oneBlock:{
         position:'absolute',
         top:50,
         flex:1,
-        display:'flex',
-        flexDirection:'column'
-    },
-    twoBlock:{
-        position:'absolute',
-        top:50,
         left:100,
-        flex:1,
         display:'flex',
         flexDirection:'column'
     },
-    threeBlock:{
+    aouditorium:{
         position:'absolute',
-        top:50,
-        left:170,
-        flex:1,
+        left:-50,
+       
+        width:100,
+        backgroundColor:'#858585',
+        height:500,
         display:'flex',
-        flexDirection:'column'
+        justifyContent:'center',
+        alignItems:'center'
     },
-    forBlock:{
+    src:{
         position:'absolute',
-        top:50,
-        right:0,
-        flex:1,
+        right:-50,
+       
+        width:100,
+        backgroundColor:'#858585',
+        height:500,
         display:'flex',
-        flexDirection:'column'
-    },
-    fiveBlock:{
-        position:'absolute',
-        top:430,
-        left:30,
-        flex:1,
-        display:'flex',
-        flexDirection:'row'
+        justifyContent:'center',
+        alignItems:'center'
     }
 })

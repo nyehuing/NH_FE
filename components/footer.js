@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { 
     StyleSheet, 
     Text, 
@@ -11,14 +10,14 @@ import DoorO from '../assets/door_Orange.svg'
 export default function Footer(props){
     return(
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={props.on}>
                     <View style={styles.button}>
                         {props.front ? <DoorO /> : <DoorG />}
                     <Text style={props.front ? styles.selectText : styles.text}>정문</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={props.off}>
                     <View style={styles.button}>
                         {props.back ?  <DoorO /> :  <DoorG />}
                         <Text style={props.back ? styles.selectText : styles.text}>후문</Text>

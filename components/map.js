@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
       },
     container:{
         position:'absolute',
-        backgroundColor:'red',
         width:'90%',
         height:600,
         padding:10,

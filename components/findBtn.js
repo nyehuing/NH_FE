@@ -14,7 +14,7 @@ export default function FindBtn({onClick, name}){
     return(
         <TouchableOpacity style={styles.container} onPress={onClick}>
             <Text style={styles.BtnText}>{name}</Text>
-            <Search />
+            <Search width = {30}/>
         </TouchableOpacity>
     )
 }
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     container:{
         position:'absolute',
         bottom:120,
-        left:100,
+        left:96,
         display:'flex',
         flexDirection:'row',
         backgroundColor:'#F6C227',
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     BtnText:{
         color:'white',
         fontSize:16,
-        fontWeight:'600'
+        fontWeight:'600',
+        marginRight:4
     }
 })
