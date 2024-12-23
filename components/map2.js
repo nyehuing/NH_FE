@@ -6,55 +6,18 @@ import {
 
 
 export default function Map({data}){
-    
+
     return(
         <View style={styles.container}>
-
-            <View style={styles.schoolMain}>
-                <Text style={styles.SText}>학교 본관</Text>
-            </View>
            
+           <View>
+            
+           </View>
             <View style={styles.oneBlock}>
-                {data.slice(1, 12).map((item, index)=>{
+                {data.slice(48, 59).map((item, index)=>{
                     return (
                         <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
-                            <Text style={styles.text}>{index+1}</Text>
-                        </View>
-                    )
-                })}
-            </View>
-            <View style={styles.twoBlock}>
-                {data.slice(12, 22).map((item, index)=>{
-                    return(
-                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
-                            <Text style={styles.text}>{index+12}</Text>
-                        </View>
-                    )
-                })}
-            </View>
-            <View style={styles.threeBlock}>
-            {data.slice(22, 32).map((item, index)=>{
-                    return(
-                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
-                            <Text style={styles.text}>{index+22}</Text>
-                        </View>
-                    )
-                })}
-            </View>
-            <View style={styles.forBlock}>
-            {data.slice(32, 41).map((item, index)=>{
-                    return(
-                        <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
-                            <Text style={styles.text}>{index+32}</Text>
-                        </View>
-                    )
-                })}
-            </View>
-            <View style={styles.fiveBlock}>
-                {data.slice(41, 49).map((item, index)=>{
-                    return(
-                        <View key={index} style={[styles.sero, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
-                            <Text  style={styles.text}>{index+41}</Text>
+                            <Text style={styles.text}>{index-48}</Text>
                         </View>
                     )
                 })}
@@ -64,14 +27,8 @@ export default function Map({data}){
 }
 
 const styles = StyleSheet.create({
-    mapContainer: {
-        width: 300, // 전체 도면 크기
-        height: 300,
-        backgroundColor: '#ddd',
-      },
     container:{
         position:'absolute',
-        backgroundColor:'red',
         width:'90%',
         height:600,
         padding:10,
