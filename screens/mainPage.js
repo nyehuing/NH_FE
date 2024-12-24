@@ -53,11 +53,12 @@ export default function MainPage(){
       }catch(error){
         console.log("차량 정보가져오는데 에러떳다", error);
       }finally{
+        console.log("데이터불러오기성공")
         setIsLoading(false);
       }
     }
     useEffect(()=>{
-      getData();
+      setInterval(()=>getData(), 2000);
     }, []) 
     if(isLoading){
       return( 
@@ -115,7 +116,7 @@ export default function MainPage(){
                   
                 </View>
                 <FindBtn onClick={modalToggle}  name={'차량 번호 검색하기'}/>
-                <Footer front = {isfront} back = {!isfront} on = {()=>setIsfront(true)} off = {()=>setIsfront(false)}/>
+                <Footer front = {!isfront} back = {isfront} on = {()=>setIsfront(true)} off = {()=>setIsfront(false)}/>
             </View>
         </View>
     )

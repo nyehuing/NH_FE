@@ -13,7 +13,7 @@ export default function Map({data}){
             <Text style={[{ color:'white'}]}>강당</Text>
            </View>
             <View style={styles.oneBlock}>
-                {data.slice(1, 11).map((item, index)=>{
+                {data.slice(48, 60).map((item, index)=>{
                     return (
                         <View key={index} style={[styles.garo, {backgroundColor:item ? "#FF2C2C" : "#53F657"}]}>
                             <Text style={styles.text}>{index+1}</Text>
@@ -43,17 +43,6 @@ const styles = StyleSheet.create({
         fontSize:16,
         textAlign:'center'
     },
-    schoolMain:{
-        position:'absolute',
-        top:-30,
-        backgroundColor:'#858585',
-        width:340,
-        height:40,
-        display:'flex',
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-    },
     SText:{
         color:'white',
         fontSize:16,
@@ -71,7 +60,7 @@ const styles = StyleSheet.create({
     },
     oneBlock:{
         position:'absolute',
-        top:50,
+        top:80,
         flex:1,
         left:100,
         display:'flex',
@@ -80,7 +69,7 @@ const styles = StyleSheet.create({
     aouditorium:{
         position:'absolute',
         left:-50,
-       
+       top:30,
         width:100,
         backgroundColor:'#858585',
         height:500,
@@ -91,7 +80,7 @@ const styles = StyleSheet.create({
     src:{
         position:'absolute',
         right:-50,
-       
+        top:30,
         width:100,
         backgroundColor:'#858585',
         height:500,

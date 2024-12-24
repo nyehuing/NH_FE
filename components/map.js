@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     },
     schoolMain:{
         position:'absolute',
-        top:-30,
+        top: 0,
         backgroundColor:'#858585',
         width:340,
         height:40,
@@ -120,14 +120,14 @@ const styles = StyleSheet.create({
     },
     oneBlock:{
         position:'absolute',
-        top:50,
+        top:80,
         flex:1,
         display:'flex',
         flexDirection:'column'
     },
     twoBlock:{
         position:'absolute',
-        top:50,
+        top:80,
         left:100,
         flex:1,
         display:'flex',
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     },
     threeBlock:{
         position:'absolute',
-        top:50,
+        top:80,
         left:170,
         flex:1,
         display:'flex',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     },
     forBlock:{
         position:'absolute',
-        top:50,
+        top:80,
         right:0,
         flex:1,
         display:'flex',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     },
     fiveBlock:{
         position:'absolute',
-        top:430,
+        top:460,
         left:30,
         flex:1,
         display:'flex',

@@ -4,22 +4,18 @@ import {
     View, 
     TouchableOpacity,
 } from 'react-native';
-import DoorG from '../assets/door_Gray.svg'
-import DoorO from '../assets/door_Orange.svg'
 
 export default function Footer(props){
     return(
             <View style={styles.container}>
                 <TouchableOpacity onPress={props.on}>
-                    <View style={styles.button}>
-                        {props.front ? <DoorO /> : <DoorG />}
+                    <View style={props.front ? styles.selectButton : styles.Button}>
                     <Text style={props.front ? styles.selectText : styles.text}>정문</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={props.off}>
-                    <View style={styles.button}>
-                        {props.back ?  <DoorO /> :  <DoorG />}
+                    <View style={props.back ? styles.selectButton  : styles.Button}>
                         <Text style={props.back ? styles.selectText : styles.text}>후문</Text>
                     </View>
                 </TouchableOpacity>
@@ -32,26 +28,41 @@ const styles =  StyleSheet.create({
     selectText:{
         fontSize:16,
         fontWeight:'600',
-        color:'#F6C227',
-        marginTop:5
+        color:'white',
     },
     text:{
         fontSize:16,
         fontWeight:'600',
-        color:'gray',
-        marginTop:5
+        color:'#F6C227',
     },  
-    button:{
+    selectButton:{
         display:'flex',
         justifyContent:'center',
         alignContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor:'#F6C227',
+        padding:5,
+        paddingLeft:18,
+        paddingRight:18,
+        borderRadius:20
+    },
+    Button:{
+        display:'flex',
+        justifyContent:'center',
+        alignContent:'center',
+        alignItems:'center',
+        backgroundColor:'white',
+        padding:5,
+        paddingLeft:18,
+        paddingRight:18,
+        borderRadius:20,
+        borderWidth:2,
+        borderColor:'#F6C227'
     },
     container:{
-        backgroundColor:'white',
-        width:'100%',
+        width:'50%',
         position:'absolute',
-        bottom:0,
+        top:60,
         padding:15,
         borderRadius:10,
         display:'flex',
