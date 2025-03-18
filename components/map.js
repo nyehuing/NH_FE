@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     forBlock:{
         position:'absolute',
         top:80,
-        right:0,
+        left:280,
         flex:1,
         display:'flex',
         flexDirection:'column'

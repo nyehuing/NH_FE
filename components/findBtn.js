@@ -22,7 +22,7 @@ export default function FindBtn({onClick, name}){
 const styles = StyleSheet.create({
     container:{
         position:'absolute',
-        bottom:80,
+        top:700,
         left:96,
         display:'flex',
         flexDirection:'row',
